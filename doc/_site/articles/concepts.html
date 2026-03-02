@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Concepts | Resultify </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Concepts | Resultify ">
+      
+      
+      <link rel="icon" href="../images/logo.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/Monadion/Resultify/blob/main/doc/articles/concepts.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.png" alt="Resultify">
+            Resultify
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="concepts">Concepts</h1>
+
+<p>Resultify, C#’ta <strong>Result pattern</strong> yaklaşımıyla “başarı/başarısızlık” durumlarını <em>açıkça</em> modelleyen hafif ve akıcı (fluent) bir kütüphanedir. Amaç; kontrol akışı için exception kullanmayı azaltmak, hata yönetimini <strong>tahmin edilebilir</strong> ve <strong>okunabilir</strong> hale getirmektir.</p>
+<blockquote>
+<p>Temel fikir: Bir operasyon “ya başarılıdır ya da hatalıdır” ve bu durum tip seviyesinde temsil edilmelidir.</p>
+</blockquote>
+<h2 id="result-nedir">Result nedir?</h2>
+<p>Resultify iki ana tip sunar:</p>
+<ul>
+<li><strong><code>Result</code></strong>: Değer döndürmeyen ama başarı/başarısızlık durumunu taşıyan sonuç.</li>
+<li><strong><code>Result&lt;T&gt;</code></strong>: Başarılıysa <code>T</code> değerini, başarısızsa hatayı taşıyan sonuç.</li>
+</ul>
+<p>Bu iki tip, “işlem sonucu”nu tek bir dönüş tipinde standardize ederek, çağıran kodun her zaman aynı şekilde karar vermesini sağlar.</p>
+<h2 id="error-nedir">Error nedir?</h2>
+<p>Başarısızlık durumunda sonuç, bir <strong><code>Error</code> record</strong> ile temsil edilir. <code>Error</code> bir “neden” taşır ve <code>Match</code> gibi operasyonlar üzerinden çağıran kodun kontrollü şekilde hata yoluna girmesini sağlar.</p>
+<h2 id="fluent--functional-pipeline-yaklaşımı">Fluent / Functional pipeline yaklaşımı</h2>
+<p>Resultify, operasyonları zincirleme kurmayı hedefler:</p>
+<ul>
+<li><strong><code>Try(...)</code></strong>: Exception atabilecek bir işi güvenli şekilde çalıştırıp sonucu <code>Result</code>/<code>Result&lt;T&gt;</code> olarak paketler.</li>
+<li><strong><code>Map(...)</code></strong>: Başarı durumunda değeri dönüştürür (success path).</li>
+<li><strong><code>Bind(...)</code></strong>: Başarı durumunda bir sonraki adımı çalıştırır ve yine Result döndüren fonksiyonlarla zincir kurar (pipeline).</li>
+<li><strong><code>Match(onSuccess, onFailure)</code></strong>: En sonda başarı/başarısızlık için ayrı davranış tanımlayıp “sonuçlandırır”.</li>
+</ul>
+<p>Bu sayede kod, <code>try/catch</code> blokları ve dağınık kontrol ifadeleri yerine “akış” şeklinde okunur.</p>
+<h2 id="exception-yaklaşımı">Exception yaklaşımı</h2>
+<p>Resultify’ın hedefi, <strong>kontrol akışı için exception kullanmamak</strong>; exception üretme potansiyeli olan noktaları <code>Try</code> gibi kapılarla Result’a çevirmektir. Bu, hataların “yakalanıp unutulması” yerine, fonksiyon imzalarıyla açıkça taşınmasını teşvik eder.</p>
+<h2 id="ne-zaman-kullanmalı">Ne zaman kullanmalı?</h2>
+<ul>
+<li>Servis/metot zincirleri kuruyorsan (parse → validate → transform → persist gibi)</li>
+<li>“Hata olursa ne yapacağım?” kararını çağıran tarafta netleştirmek istiyorsan</li>
+<li>Exception’ların kontrol akışını gizlemesinden kaçınmak istiyorsan</li>
+</ul>
+<h2 id="ne-zaman-kullanmamalı">Ne zaman kullanmamalı?</h2>
+<ul>
+<li>Tamamen throw/catch paradigmasına dayalı bir mimaride “her şeyi Result’a çevirmek” ek karmaşıklık getirebilir.</li>
+<li>Çok basit ve tek satırlık işlemlerde, Result zinciri gereksiz olabilir (takım standardına göre karar verin).</li>
+</ul>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/Monadion/Resultify/blob/main/doc/articles/concepts.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
