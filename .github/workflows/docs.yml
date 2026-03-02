@@ -2,8 +2,10 @@ name: Build & Deploy Documentation
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
+    paths:
+      - "doc/**"
+      - "docfx.json"
   workflow_dispatch: {}
 
 jobs:
