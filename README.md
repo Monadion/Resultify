@@ -24,7 +24,7 @@ enabling safe error handling, fluent pipelines, and exception-free code.
 You can install the package via NuGet:
 
 ```bash
-dotnet add package Resultify
+dotnet add package Monadion.Resultify
 ```
 
 ## Quick Example
@@ -41,22 +41,18 @@ var message =
 
 ## Documentation
 
-Full documentation and guides reference:
+Full [documentation](https://Monadion.github.io/Resultify/) and guides reference:
 
-https://Monadion.github.io/Resultify/
+- Getting Started
 
-Getting Started
+- Functional Pipelines
 
-Functional Pipelines
-
-API Reference
-
-Advanced Usage
+- Advanced Usage
 
 ## Changelog
 
-See [CHANGELOG.md]() for release history.
+See [CHANGELOG.md](https://github.com/Monadion/Resultify/blob/main/CHANGELOG.md) for release history.
 
 ## License
 
-MIT License — see [LICENSE]()
+MIT License — see [LICENSE](https://github.com/Monadion/Resultify/blob/main/LICENSE)
