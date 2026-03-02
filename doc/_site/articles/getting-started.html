@@ -7,7 +7,7 @@
       <meta name="title" content="Getting Started | Resultify ">
       
       
-      <link rel="icon" href="../favicon.ico">
+      <link rel="icon" href="../images/logo.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
       <meta name="docfx:navrel" content="../toc.html">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      
+      <meta name="docfx:docurl" content="https://github.com/Monadion/Resultify/blob/main/doc/articles/getting-started.md/#L1">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -90,45 +90,37 @@
 <p>This guide shows how to quickly install and use the <strong>Resultify</strong> NuGet package in your .NET project.</p>
 <h2 id="1-install-via-nuget">1. Install via NuGet</h2>
 <p>You can install the package using the <strong>.NET CLI</strong>:</p>
-<pre><code class="lang-bash">dotnet add package Resultify --version 0.1.0
+<pre><code class="lang-bash">dotnet add package Monadion.Resultify --version 0.1.0
 </code></pre>
 <p>Or via Visual Studio:</p>
 <ol>
 <li><p>Right-click on your project → Manage NuGet Packages…</p>
 </li>
-<li><p>Search for Resultify</p>
+<li><p>Search for Monadion.Resultify</p>
 </li>
 <li><p>Click Install</p>
 </li>
 </ol>
 <h2 id="2-add-a-using-statement">2. Add a Using Statement</h2>
 <p>In your C# code, add:</p>
-<pre><code class="lang-c#">using Resultify.Core.Models;
-using Resultify.Core.ValueObjects;
+<pre><code class="lang-c#">using Monadion.Resultify;
 </code></pre>
 <h2 id="3-example-usage">3. Example Usage</h2>
 <p>Here’s a simple example of how to use the package:</p>
-<pre><code class="lang-c#">using Resultify.Core.Models;
-using Resultify.Core.ValueObjects;
+<pre><code class="lang-c#">using Monadion.Resultify;
 
 Result result = Result.Success();
 
 if (result.IsSuccess)
+{
     Console.WriteLine(&quot;result success&quot;);
+}
 </code></pre>
-<h2 id="4-learn-more">4. Learn More</h2>
-<ul>
-<li><p>Check the API reference in this documentation.</p>
-</li>
-<li><p>Browse tutorials and examples to see how to integrate the package into real projects.</p>
-</li>
-<li><p>If you encounter issues, refer to the FAQ or open an issue on GitHub.</p>
-</li>
-</ul>
 
 </article>
 
         <div class="contribution d-print-none">
+          <a href="https://github.com/Monadion/Resultify/blob/main/doc/articles/getting-started.md/#L1" class="edit-link">Edit this page</a>
         </div>
 
         <div class="next-article d-print-none border-top" id="nextArticle"></div>

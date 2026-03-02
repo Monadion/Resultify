@@ -2,12 +2,12 @@
 <html>
   <head>
     <meta charset="utf-8">
-      <title>Welcome! | Resultify </title>
+      <title>Resultify | Resultify </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="title" content="Welcome! | Resultify ">
+      <meta name="title" content="Resultify | Resultify ">
       
       
-      <link rel="icon" href="favicon.ico">
+      <link rel="icon" href="images/logo.ico">
       <link rel="stylesheet" href="public/docfx.min.css">
       <link rel="stylesheet" href="public/main.css">
       <meta name="docfx:navrel" content="toc.html">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="">
       
       
-      
+      <meta name="docfx:docurl" content="https://github.com/Monadion/Resultify/blob/main/doc/index.md/#L1">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -71,31 +71,40 @@
         </div>
 
         <article data-uid="">
-<h1 id="welcome">Welcome!</h1>
+<h1 id="resultify">Resultify</h1>
 
-<p>This documentation provides all the information you need for <strong>Resultify</strong>.<br>
-Here you will find guides, usage instructions, and references.</p>
-<h1 id="open-buffet-resultify">Open Buffet Resultify</h1>
-<p><strong>Open Buffet Resultify</strong> is a lightweight, fluent, and functional-style Result library for C#.<br>
-It provides <code>Result</code> and <code>Result&lt;T&gt;</code> types with <strong>Try, Map, Bind, and Match</strong> operations, enabling safe error handling, fluent pipelines, and exception-free code.</p>
-<hr>
+<p>Resultify is a lightweight, fluent, functional-style Result library for C#.<br>
+It provides <code>Result</code> and <code>Result&lt;T&gt;</code> with <code>Try</code>, <code>Map</code>, <code>Bind</code>, and <code>Match</code> to build safe, exception-free, chainable pipelines.</p>
+<h2 id="install">Install</h2>
+<pre><code class="lang-bash">dotnet add package Monadion.Resultify
+</code></pre>
+<h2 id="quick-example">Quick Example</h2>
+<pre><code class="lang-c#">var message =
+    Result.Try(() =&gt; int.Parse(input))
+          .Map(x =&gt; x * 2)
+          .Match(
+              onSuccess: v =&gt; $&quot;OK: {v}&quot;,
+              onFailure: e =&gt; $&quot;ERR: {e}&quot;
+          );
+</code></pre>
 <h2 id="features">Features</h2>
 <ul>
 <li><strong>Fluent API</strong> with <code>Try</code>, <code>Map</code>, <code>Bind</code>, <code>Match</code></li>
 <li><strong>Non-generic</strong> and <strong>generic</strong> <code>Result</code> types</li>
 <li><strong>Exception-safe</strong> operations with <code>Result.Try</code></li>
-<li>Supports <strong>NuGet packaging</strong> with metadata, icon, and tags</li>
-<li>Fully <strong>chainable pipelines</strong> for functional programming style</li>
+<li>Designed for chainable functional pipelines</li>
 </ul>
-<hr>
-<h2 id="quick-start">Quick Start</h2>
-<p>You can install the package via NuGet:</p>
-<pre><code class="lang-bash">dotnet add package Resultify
-</code></pre>
+<h2 id="next-steps">Next steps</h2>
+<ul>
+<li>Getting Started: <code>articles/getting-started.md</code></li>
+<li>Examples: <code>articles/examples.md</code></li>
+<li>Changelog: <code>../CHANGELOG.md</code></li>
+</ul>
 
 </article>
 
         <div class="contribution d-print-none">
+          <a href="https://github.com/Monadion/Resultify/blob/main/doc/index.md/#L1" class="edit-link">Edit this page</a>
         </div>
 
         <div class="next-article d-print-none border-top" id="nextArticle"></div>

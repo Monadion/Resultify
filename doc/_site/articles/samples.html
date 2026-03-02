@@ -7,7 +7,7 @@
       <meta name="title" content="Samples | Resultify ">
       
       
-      <link rel="icon" href="../favicon.ico">
+      <link rel="icon" href="../images/logo.ico">
       <link rel="stylesheet" href="../public/docfx.min.css">
       <link rel="stylesheet" href="../public/main.css">
       <meta name="docfx:navrel" content="../toc.html">
@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      
+      <meta name="docfx:docurl" content="https://github.com/Monadion/Resultify/blob/main/doc/articles/samples.md/#L1">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -87,51 +87,48 @@
         <article data-uid="">
 <h1 id="samples">Samples</h1>
 
-<h2 id="sample-1">Sample 1</h2>
-<pre><code class="lang-c#">using Resultify.Core.Models;
-using Resultify.Core.ValueObjects;
-
-Result result = Result.Success();
+<p>All samples below assume:</p>
+<p>In your C# code, add:</p>
+<pre><code class="lang-c#">using Monadion.Resultify;
+</code></pre>
+<h2 id="sample-1--success-non-generic">Sample 1 — Success (non-generic)</h2>
+<pre><code class="lang-c#">Result result = Result.Success();
 
 if (result.IsSuccess)
+{
     Console.WriteLine(&quot;result success&quot;);
+}
 </code></pre>
-<h2 id="sample-2">Sample 2</h2>
-<pre><code class="lang-c#">using Resultify.Core.Models;
-using Resultify.Core.ValueObjects;
-
-Error error = new Error(&quot;Error.Code&quot;, &quot; error description&quot;);
+<h2 id="sample-2--failure-non-generic">Sample 2 — Failure (non-generic)</h2>
+<pre><code class="lang-c#">Error error = new Error(&quot;Error.Code&quot;, &quot; error description&quot;);
 
 Result result = Result.Failure(error);
 
 if (result.IsFailure)
+{
     Console.WriteLine($&quot;result failure | code: {result.Error.Code}, description: {result.Error.Description}&quot;);
+}
 </code></pre>
-<h2 id="sample-3">Sample 3</h2>
-<pre><code class="lang-c#">using Resultify.Core.Models;
-using Resultify.Core.ValueObjects;
-
-Result&lt;int&gt; result = Result&lt;int&gt;.Success(1);
+<h2 id="sample-3--success-generic">Sample 3 — Success (generic)</h2>
+<pre><code class="lang-c#">Result&lt;int&gt; result = Result&lt;int&gt;.Success(1);
 
 if (result.IsSuccess)
+{
     Console.WriteLine($&quot;result success | value:{result.Value}&quot;);
+}
 </code></pre>
-<h2 id="sample-4">Sample 4</h2>
-<pre><code class="lang-c#">using Resultify.Core.Models;
-using Resultify.Core.ValueObjects;
-
-Error error = new Error(&quot;Error.Code&quot;, &quot;error description&quot;);
+<h2 id="sample-4--failure-generic">Sample 4 — Failure (generic)</h2>
+<pre><code class="lang-c#">Error error = new Error(&quot;Error.Code&quot;, &quot;error description&quot;);
 
 Result&lt;int&gt; result = Result&lt;int&gt;.Failure(error);
 
 if (result.IsFailure)
+{
     Console.WriteLine($&quot;result failure | code: {result.Error.Code}, description: {result.Error.Description}&quot;);
+}
 </code></pre>
-<h2 id="sample-5">Sample 5</h2>
-<pre><code class="lang-c#">using Resultify.Core.Models;
-using Resultify.Core.ValueObjects;
-
-Result&lt;int&gt;
+<h2 id="sample-5--try--match-exception-safe">Sample 5 — Try + Match (exception-safe)</h2>
+<pre><code class="lang-c#">Result&lt;int&gt;
     .Try(() =&gt; { throw new DivideByZeroException(); })
     .Match(
         success =&gt; Console.WriteLine($&quot;success: {success}&quot;),
@@ -142,6 +139,7 @@ Result&lt;int&gt;
 </article>
 
         <div class="contribution d-print-none">
+          <a href="https://github.com/Monadion/Resultify/blob/main/doc/articles/samples.md/#L1" class="edit-link">Edit this page</a>
         </div>
 
         <div class="next-article d-print-none border-top" id="nextArticle"></div>
