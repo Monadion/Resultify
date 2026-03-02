@@ -36,5 +36,7 @@ using Monadion.Resultify;
 Result result = Result.Success();
 
 if (result.IsSuccess)
+{
     Console.WriteLine("result success");
+}
 ```
