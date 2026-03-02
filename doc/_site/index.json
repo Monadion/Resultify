@@ -1,0 +1,22 @@
+{
+  "articles/getting-started.html": {
+    "href": "articles/getting-started.html",
+    "title": "Getting Started | Resultify",
+    "summary": "Getting Started This guide shows how to quickly install and use the Resultify NuGet package in your .NET project. 1. Install via NuGet You can install the package using the .NET CLI: dotnet add package Resultify --version 0.1.0 Or via Visual Studio: Right-click on your project → Manage NuGet Packages… Search for Resultify Click Install 2. Add a Using Statement In your C# code, add: using Resultify.Core.Models; using Resultify.Core.ValueObjects; 3. Example Usage Here’s a simple example of how to use the package: using Resultify.Core.Models; using Resultify.Core.ValueObjects; Result result = Result.Success(); if (result.IsSuccess) Console.WriteLine(\"result success\"); 4. Learn More Check the API reference in this documentation. Browse tutorials and examples to see how to integrate the package into real projects. If you encounter issues, refer to the FAQ or open an issue on GitHub."
+  },
+  "articles/introduction.html": {
+    "href": "articles/introduction.html",
+    "title": "Introduction | Resultify",
+    "summary": "Introduction Welcome to the Resultify documentation! Resultify is a modern, easy-to-use tool designed to lightweight, fluent, and functional-style Result library for C#.. It helps developers at returns efficiently and reliably. Features Fluent API with Try, Map, Bind, Match Non-generic and generic Result types Exception-safe operations with Result.Try Supports NuGet packaging with metadata, icon, and tags Fully chainable pipelines for functional programming style Why Use Resultify? Ease of Use: Clear API and documentation make it quick to get started. Performance: Optimized for efficiently. Extensibility: Easily customizable to fit your needs. Getting Started To start using Resultify, follow the steps in the Quick Start section on the homepage. You’ll be able to set up, run, and integrate it into your projects in minutes."
+  },
+  "articles/samples.html": {
+    "href": "articles/samples.html",
+    "title": "Samples | Resultify",
+    "summary": "Samples Sample 1 using Resultify.Core.Models; using Resultify.Core.ValueObjects; Result result = Result.Success(); if (result.IsSuccess) Console.WriteLine(\"result success\"); Sample 2 using Resultify.Core.Models; using Resultify.Core.ValueObjects; Error error = new Error(\"Error.Code\", \" error description\"); Result result = Result.Failure(error); if (result.IsFailure) Console.WriteLine($\"result failure | code: {result.Error.Code}, description: {result.Error.Description}\"); Sample 3 using Resultify.Core.Models; using Resultify.Core.ValueObjects; Result<int> result = Result<int>.Success(1); if (result.IsSuccess) Console.WriteLine($\"result success | value:{result.Value}\"); Sample 4 using Resultify.Core.Models; using Resultify.Core.ValueObjects; Error error = new Error(\"Error.Code\", \"error description\"); Result<int> result = Result<int>.Failure(error); if (result.IsFailure) Console.WriteLine($\"result failure | code: {result.Error.Code}, description: {result.Error.Description}\"); Sample 5 using Resultify.Core.Models; using Resultify.Core.ValueObjects; Result<int> .Try(() => { throw new DivideByZeroException(); }) .Match( success => Console.WriteLine($\"success: {success}\"), failure => Console.WriteLine($\"failure: {failure.Description}\") );"
+  },
+  "index.html": {
+    "href": "index.html",
+    "title": "Welcome! | Resultify",
+    "summary": "Welcome! This documentation provides all the information you need for Resultify. Here you will find guides, usage instructions, and references. Open Buffet Resultify Open Buffet Resultify is a lightweight, fluent, and functional-style Result library for C#. It provides Result and Result<T> types with Try, Map, Bind, and Match operations, enabling safe error handling, fluent pipelines, and exception-free code. Features Fluent API with Try, Map, Bind, Match Non-generic and generic Result types Exception-safe operations with Result.Try Supports NuGet packaging with metadata, icon, and tags Fully chainable pipelines for functional programming style Quick Start You can install the package via NuGet: dotnet add package Resultify"
+  }
+}
