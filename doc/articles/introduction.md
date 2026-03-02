@@ -2,26 +2,25 @@
 
 Welcome to the **Resultify** documentation!  
 
-Resultify is a modern, easy-to-use tool designed to **lightweight, fluent, and functional-style Result library for C#.**.  
-It helps developers at **returns** efficiently and reliably.
+**Resultify** is a lightweight, fluent, functional-style Result library for C#.  
+It provides `Result` and `Result<T>` with `Try`, `Map`, `Bind`, and `Match` to build safe, exception-free, chainable pipelines.
 
 ## Features
 
-- **Fluent API** with `Try`, `Map`, `Bind`, `Match`  
-- **Non-generic** and **generic** `Result` types  
-- **Exception-safe** operations with `Result.Try`  
-- Supports **NuGet packaging** with metadata, icon, and tags  
-- Fully **chainable pipelines** for functional programming style  
+- Fluent API: `Try`, `Map`, `Bind`, `Match`
+- `Result` and `Result<T>`
+- Exception-safe execution via `Result.Try(...)`
+- Designed for clean, chainable functional pipelines
 
-## Why Use Resultify?
+## Why Resultify?
 
-- **Ease of Use:** Clear API and documentation make it quick to get started.  
-- **Performance:** Optimized for efficiently.  
-- **Extensibility:** Easily customizable to fit your needs.
+- **Safer error handling:** Avoid exceptions in normal control flow.
+- **Readable code:** Compose operations with `Map`/`Bind` instead of nested `if` checks.
+- **Consistent outcomes:** Model success and failure explicitly with a single return type.
 
 ## Getting Started
 
-To start using Resultify, follow the steps in the **Quick Start** section on the homepage.  
-You’ll be able to set up, run, and integrate it into your projects in minutes.
+Start with **Getting Started** (installation + first usage), then explore:
 
----
+- **Examples** for common patterns and pipelines
+- **API Reference** for the full surface area
