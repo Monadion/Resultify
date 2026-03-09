@@ -1,44 +1,75 @@
 # Concepts
 
-Resultify, C#’ta **Result pattern** yaklaşımıyla “başarı/başarısızlık” durumlarını *açıkça* modelleyen hafif ve akıcı (fluent) bir kütüphanedir. Amaç; kontrol akışı için exception kullanmayı azaltmak, hata yönetimini **tahmin edilebilir** ve **okunabilir** hale getirmektir.
+Resultify is a lightweight library that implements the **Result pattern** for C#.
 
-> Temel fikir: Bir operasyon “ya başarılıdır ya da hatalıdır” ve bu durum tip seviyesinde temsil edilmelidir.
+Instead of relying on exceptions for control flow, Resultify models **success and failure explicitly** using dedicated result types. This approach makes error handling more predictable, composable, and easier to read.
 
-## Result nedir?
 
-Resultify iki ana tip sunar:
+## Result types
 
-- **`Result`**: Değer döndürmeyen ama başarı/başarısızlık durumunu taşıyan sonuç.
-- **`Result<T>`**: Başarılıysa `T` değerini, başarısızsa hatayı taşıyan sonuç.
+Resultify provides two core types:
 
-Bu iki tip, “işlem sonucu”nu tek bir dönüş tipinde standardize ederek, çağıran kodun her zaman aynı şekilde karar vermesini sağlar.
+- **`Result`**  
+  Represents an operation that either succeeds or fails but does **not return a value**.
 
-## Error nedir?
+- **`Result<T>`**  
+  Represents an operation that either succeeds with a value of type `T` or fails with an error.
 
-Başarısızlık durumunda sonuç, bir **`Error` record** ile temsil edilir. `Error` bir “neden” taşır ve `Match` gibi operasyonlar üzerinden çağıran kodun kontrollü şekilde hata yoluna girmesini sağlar.
+Using these types standardizes how operations report their outcome and ensures callers handle both success and failure explicitly.
 
-## Fluent / Functional pipeline yaklaşımı
+## Error
 
-Resultify, operasyonları zincirleme kurmayı hedefler:
+Failures are represented by an **`Error` record**.
 
-- **`Try(...)`**: Exception atabilecek bir işi güvenli şekilde çalıştırıp sonucu `Result`/`Result<T>` olarak paketler.
-- **`Map(...)`**: Başarı durumunda değeri dönüştürür (success path).
-- **`Bind(...)`**: Başarı durumunda bir sonraki adımı çalıştırır ve yine Result döndüren fonksiyonlarla zincir kurar (pipeline).
-- **`Match(onSuccess, onFailure)`**: En sonda başarı/başarısızlık için ayrı davranış tanımlayıp “sonuçlandırır”.
+An `Error` describes **why an operation failed** and allows callers to react to failures in a controlled way using operations such as `Match`.
 
-Bu sayede kod, `try/catch` blokları ve dağınık kontrol ifadeleri yerine “akış” şeklinde okunur.
+This makes failure handling explicit rather than hidden inside exception handling logic.
 
-## Exception yaklaşımı
 
-Resultify’ın hedefi, **kontrol akışı için exception kullanmamak**; exception üretme potansiyeli olan noktaları `Try` gibi kapılarla Result’a çevirmektir. Bu, hataların “yakalanıp unutulması” yerine, fonksiyon imzalarıyla açıkça taşınmasını teşvik eder.
+## Functional pipelines
 
-## Ne zaman kullanmalı?
+Resultify is designed for **fluent functional pipelines**.
 
-- Servis/metot zincirleri kuruyorsan (parse → validate → transform → persist gibi)
-- “Hata olursa ne yapacağım?” kararını çağıran tarafta netleştirmek istiyorsan
-- Exception’ların kontrol akışını gizlemesinden kaçınmak istiyorsan
+Operations can be chained together to build a clear execution flow.
 
-## Ne zaman kullanmamalı?
+Key operations include:
 
-- Tamamen throw/catch paradigmasına dayalı bir mimaride “her şeyi Result’a çevirmek” ek karmaşıklık getirebilir.
-- Çok basit ve tek satırlık işlemlerde, Result zinciri gereksiz olabilir (takım standardına göre karar verin).
+- **`Try(...)`**  
+  Executes a function that may throw and converts the result into a `Result` or `Result<T>`.
+
+- **`Map(...)`**  
+  Transforms the successful value while preserving the result structure.
+
+- **`Bind(...)`**  
+  Chains operations that themselves return `Result` values, allowing complex workflows to be composed.
+
+- **`Match(onSuccess, onFailure)`**  
+  Handles both success and failure cases and produces the final result.
+
+This approach replaces scattered `try/catch` blocks with a **clear and composable execution pipeline**.
+
+## Exception handling
+
+Resultify does **not eliminate exceptions**, but it encourages avoiding them for normal control flow.
+
+Instead, potentially failing operations are wrapped using `Try`, which converts exceptions into `Result` values.
+
+This makes error propagation explicit and visible in method signatures.
+
+## When to use Resultify
+
+Resultify is useful when:
+
+- building **service pipelines** (parse → validate → transform → persist)
+- you want **explicit error handling**
+- you want to avoid hidden control flow caused by exceptions
+- composing multiple operations into a **predictable workflow**
+
+## When not to use it
+
+Resultify may not be necessary when:
+
+- your project relies heavily on **exception-based control flow**
+- the operation is extremely simple and a result pipeline would add unnecessary complexity
+
+As always, choose the approach that best fits your team's coding style and architecture.

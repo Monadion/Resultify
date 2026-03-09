@@ -7,7 +7,7 @@ This guide shows how to quickly install and use the **Resultify** NuGet package 
 You can install the package using the **.NET CLI**:
 
 ```bash
-dotnet add package Monadion.Resultify --version 0.1.0
+dotnet add package Monadion.Resultify
 ```
 
 Or via Visual Studio:

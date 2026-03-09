@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/Monadion/Resultify/blob/main/doc/articles/concepts.md/#L1">
+      <meta name="docfx:docurl" content="https://github.com/Monadion/Resultify/blob/feature/docfx/doc/articles/concepts.md/#L1">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -87,46 +87,66 @@
         <article data-uid="">
 <h1 id="concepts">Concepts</h1>
 
-<p>Resultify, C#’ta <strong>Result pattern</strong> yaklaşımıyla “başarı/başarısızlık” durumlarını <em>açıkça</em> modelleyen hafif ve akıcı (fluent) bir kütüphanedir. Amaç; kontrol akışı için exception kullanmayı azaltmak, hata yönetimini <strong>tahmin edilebilir</strong> ve <strong>okunabilir</strong> hale getirmektir.</p>
-<blockquote>
-<p>Temel fikir: Bir operasyon “ya başarılıdır ya da hatalıdır” ve bu durum tip seviyesinde temsil edilmelidir.</p>
-</blockquote>
-<h2 id="result-nedir">Result nedir?</h2>
-<p>Resultify iki ana tip sunar:</p>
+<p>Resultify is a lightweight library that implements the <strong>Result pattern</strong> for C#.</p>
+<p>Instead of relying on exceptions for control flow, Resultify models <strong>success and failure explicitly</strong> using dedicated result types. This approach makes error handling more predictable, composable, and easier to read.</p>
+<h2 id="result-types">Result types</h2>
+<p>Resultify provides two core types:</p>
 <ul>
-<li><strong><code>Result</code></strong>: Değer döndürmeyen ama başarı/başarısızlık durumunu taşıyan sonuç.</li>
-<li><strong><code>Result&lt;T&gt;</code></strong>: Başarılıysa <code>T</code> değerini, başarısızsa hatayı taşıyan sonuç.</li>
+<li><p><strong><code>Result</code></strong><br>
+Represents an operation that either succeeds or fails but does <strong>not return a value</strong>.</p>
+</li>
+<li><p><strong><code>Result&lt;T&gt;</code></strong><br>
+Represents an operation that either succeeds with a value of type <code>T</code> or fails with an error.</p>
+</li>
 </ul>
-<p>Bu iki tip, “işlem sonucu”nu tek bir dönüş tipinde standardize ederek, çağıran kodun her zaman aynı şekilde karar vermesini sağlar.</p>
-<h2 id="error-nedir">Error nedir?</h2>
-<p>Başarısızlık durumunda sonuç, bir <strong><code>Error</code> record</strong> ile temsil edilir. <code>Error</code> bir “neden” taşır ve <code>Match</code> gibi operasyonlar üzerinden çağıran kodun kontrollü şekilde hata yoluna girmesini sağlar.</p>
-<h2 id="fluent--functional-pipeline-yaklaşımı">Fluent / Functional pipeline yaklaşımı</h2>
-<p>Resultify, operasyonları zincirleme kurmayı hedefler:</p>
+<p>Using these types standardizes how operations report their outcome and ensures callers handle both success and failure explicitly.</p>
+<h2 id="error">Error</h2>
+<p>Failures are represented by an <strong><code>Error</code> record</strong>.</p>
+<p>An <code>Error</code> describes <strong>why an operation failed</strong> and allows callers to react to failures in a controlled way using operations such as <code>Match</code>.</p>
+<p>This makes failure handling explicit rather than hidden inside exception handling logic.</p>
+<h2 id="functional-pipelines">Functional pipelines</h2>
+<p>Resultify is designed for <strong>fluent functional pipelines</strong>.</p>
+<p>Operations can be chained together to build a clear execution flow.</p>
+<p>Key operations include:</p>
 <ul>
-<li><strong><code>Try(...)</code></strong>: Exception atabilecek bir işi güvenli şekilde çalıştırıp sonucu <code>Result</code>/<code>Result&lt;T&gt;</code> olarak paketler.</li>
-<li><strong><code>Map(...)</code></strong>: Başarı durumunda değeri dönüştürür (success path).</li>
-<li><strong><code>Bind(...)</code></strong>: Başarı durumunda bir sonraki adımı çalıştırır ve yine Result döndüren fonksiyonlarla zincir kurar (pipeline).</li>
-<li><strong><code>Match(onSuccess, onFailure)</code></strong>: En sonda başarı/başarısızlık için ayrı davranış tanımlayıp “sonuçlandırır”.</li>
+<li><p><strong><code>Try(...)</code></strong><br>
+Executes a function that may throw and converts the result into a <code>Result</code> or <code>Result&lt;T&gt;</code>.</p>
+</li>
+<li><p><strong><code>Map(...)</code></strong><br>
+Transforms the successful value while preserving the result structure.</p>
+</li>
+<li><p><strong><code>Bind(...)</code></strong><br>
+Chains operations that themselves return <code>Result</code> values, allowing complex workflows to be composed.</p>
+</li>
+<li><p><strong><code>Match(onSuccess, onFailure)</code></strong><br>
+Handles both success and failure cases and produces the final result.</p>
+</li>
 </ul>
-<p>Bu sayede kod, <code>try/catch</code> blokları ve dağınık kontrol ifadeleri yerine “akış” şeklinde okunur.</p>
-<h2 id="exception-yaklaşımı">Exception yaklaşımı</h2>
-<p>Resultify’ın hedefi, <strong>kontrol akışı için exception kullanmamak</strong>; exception üretme potansiyeli olan noktaları <code>Try</code> gibi kapılarla Result’a çevirmektir. Bu, hataların “yakalanıp unutulması” yerine, fonksiyon imzalarıyla açıkça taşınmasını teşvik eder.</p>
-<h2 id="ne-zaman-kullanmalı">Ne zaman kullanmalı?</h2>
+<p>This approach replaces scattered <code>try/catch</code> blocks with a <strong>clear and composable execution pipeline</strong>.</p>
+<h2 id="exception-handling">Exception handling</h2>
+<p>Resultify does <strong>not eliminate exceptions</strong>, but it encourages avoiding them for normal control flow.</p>
+<p>Instead, potentially failing operations are wrapped using <code>Try</code>, which converts exceptions into <code>Result</code> values.</p>
+<p>This makes error propagation explicit and visible in method signatures.</p>
+<h2 id="when-to-use-resultify">When to use Resultify</h2>
+<p>Resultify is useful when:</p>
 <ul>
-<li>Servis/metot zincirleri kuruyorsan (parse → validate → transform → persist gibi)</li>
-<li>“Hata olursa ne yapacağım?” kararını çağıran tarafta netleştirmek istiyorsan</li>
-<li>Exception’ların kontrol akışını gizlemesinden kaçınmak istiyorsan</li>
+<li>building <strong>service pipelines</strong> (parse → validate → transform → persist)</li>
+<li>you want <strong>explicit error handling</strong></li>
+<li>you want to avoid hidden control flow caused by exceptions</li>
+<li>composing multiple operations into a <strong>predictable workflow</strong></li>
 </ul>
-<h2 id="ne-zaman-kullanmamalı">Ne zaman kullanmamalı?</h2>
+<h2 id="when-not-to-use-it">When not to use it</h2>
+<p>Resultify may not be necessary when:</p>
 <ul>
-<li>Tamamen throw/catch paradigmasına dayalı bir mimaride “her şeyi Result’a çevirmek” ek karmaşıklık getirebilir.</li>
-<li>Çok basit ve tek satırlık işlemlerde, Result zinciri gereksiz olabilir (takım standardına göre karar verin).</li>
+<li>your project relies heavily on <strong>exception-based control flow</strong></li>
+<li>the operation is extremely simple and a result pipeline would add unnecessary complexity</li>
 </ul>
+<p>As always, choose the approach that best fits your team's coding style and architecture.</p>
 
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/Monadion/Resultify/blob/main/doc/articles/concepts.md/#L1" class="edit-link">Edit this page</a>
+          <a href="https://github.com/Monadion/Resultify/blob/feature/docfx/doc/articles/concepts.md/#L1" class="edit-link">Edit this page</a>
         </div>
 
         <div class="next-article d-print-none border-top" id="nextArticle"></div>

@@ -20,6 +20,7 @@ All notable changes to this project will be documented in this file.
 - Refactored core code for more clean.
 - edited **`.Core`** namespace.
 - edited readme file.
+- edited docfx project.
 
 ### Fixed
 

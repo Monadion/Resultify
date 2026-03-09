@@ -2,15 +2,7 @@
   href: introduction.md
 - name: Getting Started
   href: getting-started.md
-- name: Samples
-  href: samples.md
-- name: Changelog
-  href: changelog.md
-- name: Architecture
-  href: architecture.md
 - name: Concepts
   href: concepts.md
-- name: Versioning & Compatibility
-  href: versioning.md
-- name: Contributing
-  href: contributing.md
+- name: Samples
+  href: samples.md
