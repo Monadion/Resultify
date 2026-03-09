@@ -19,6 +19,7 @@ All notable changes to this project will be documented in this file.
 - Changed project inside folder structure. 
 - Refactored core code for more clean.
 - edited **`.Core`** namespace.
+- edited readme file.
 
 ### Fixed
 
