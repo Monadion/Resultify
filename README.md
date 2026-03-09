@@ -1,20 +1,26 @@
 # Resultify
 
-[![NuGet](https://img.shields.io/nuget/v/Monadion.Resultify.svg)](https://www.nuget.org/packages/Monadion.Resultify)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-
 **Resultify** is a lightweight, fluent, and functional-style Result library for C#.  
 It provides `Result` and `Result<T>` types with **Try, Map, Bind, and Match** operations, 
 enabling safe error handling, fluent pipelines, and exception-free code.
 
+[![NuGet](https://img.shields.io/nuget/v/Monadion.Resultify.svg)](https://www.nuget.org/packages/Monadion.Resultify)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![GitHub](https://img.shields.io/badge/github-Monadion%2FResultify-black)](https://github.com/Monadion/Resultify)
+[![Build](https://img.shields.io/github/actions/workflow/status/Monadion/Resultify/ci.yml?branch=main)](https://github.com/Monadion/Resultify/actions)
+
 ---
+
+## Why Resultify?
+
+Exceptions can make control flow unpredictable and expensive.  
+Resultify provides a functional approach to error handling with explicit success and failure states.
 
 ## Features
 
 - **Fluent API** with `Try`, `Map`, `Bind`, `Match`  
 - **Non-generic** and **generic** `Result` types  
 - **Exception-safe** operations with `Result.Try`  
-- Supports **NuGet packaging** with metadata, icon, and tags  
 - Fully **chainable pipelines** for functional programming style  
 
 ---
@@ -39,20 +45,29 @@ var message =
           );
 ```
 
+
+
+
 ## Documentation
 
-Full [documentation](https://Monadion.github.io/Resultify/) and guides reference:
+See the full [documentation](https://monadion.github.io/Resultify/).
 
-- Getting Started
+## Contributing
 
-- Functional Pipelines
-
-- Advanced Usage
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) before submitting pull requests.
 
 ## Changelog
 
-See [CHANGELOG.md](https://github.com/Monadion/Resultify/blob/main/CHANGELOG.md) for release history.
+See [CHANGELOG.md](CHANGELOG.md) for release history.
 
 ## License
 
-MIT License — see [LICENSE](https://github.com/Monadion/Resultify/blob/main/LICENSE)
+MIT License — see [LICENSE](LICENSE).
+
+## Code of Conduct
+
+See [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
+
+## Security
+
+See [SECURITY.md](SECURITY.md).
