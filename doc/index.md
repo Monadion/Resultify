@@ -7,7 +7,17 @@ _layout: landing
 Resultify is a lightweight, fluent, functional-style Result library for C#.  
 It provides `Result` and `Result<T>` with `Try`, `Map`, `Bind`, and `Match` to build safe, exception-free, chainable pipelines.
 
+## Features
+
+- **Fluent API** with `Try`, `Map`, `Bind`, `Match`  
+- **`Result`** and **`Result<T>`** types  
+- **Exception-safe** operations with `Result.Try`  
+- Composable functional pipelines
+- Lightweight and dependency-free
+
 ## Install
+
+Install via NuGet:
 
 ```bash
 dotnet add package Monadion.Resultify
@@ -24,16 +34,8 @@ var message =
           );
 ```
 
-## Features
+## Project Links
 
-- **Fluent API** with `Try`, `Map`, `Bind`, `Match`  
-- **Non-generic** and **generic** `Result` types  
-- **Exception-safe** operations with `Result.Try`  
-- Designed for chainable functional pipelines 
-
-
-## Next steps
-
-- Getting Started: `articles/getting-started.md`
-- Examples: `articles/examples.md`
-- Changelog: `../CHANGELOG.md`
+- [GitHub Repository](https://github.com/Monadion/Resultify)
+- [Nuget Package]()
+- [CHANGELOG](https://github.com/Monadion/Resultify/blob/main/CHANGELOG.md)

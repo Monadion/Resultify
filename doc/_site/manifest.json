@@ -12,40 +12,10 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "articles/architecture.md",
-      "output": {
-        ".html": {
-          "relative_path": "articles/architecture.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "articles/changelog.md",
-      "output": {
-        ".html": {
-          "relative_path": "articles/changelog.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
       "source_relative_path": "articles/concepts.md",
       "output": {
         ".html": {
           "relative_path": "articles/concepts.html"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "articles/contributing.md",
-      "output": {
-        ".html": {
-          "relative_path": "articles/contributing.html"
         }
       },
       "version": ""
@@ -89,16 +59,6 @@
         },
         ".json": {
           "relative_path": "articles/toc.json"
-        }
-      },
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "articles/versioning.md",
-      "output": {
-        ".html": {
-          "relative_path": "articles/versioning.html"
         }
       },
       "version": ""

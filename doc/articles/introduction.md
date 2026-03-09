@@ -1,26 +1,18 @@
 # Introduction
 
-Welcome to the **Resultify** documentation!  
+Resultify is a lightweight functional Result library for C#.
 
-**Resultify** is a lightweight, fluent, functional-style Result library for C#.  
-It provides `Result` and `Result<T>` with `Try`, `Map`, `Bind`, and `Match` to build safe, exception-free, chainable pipelines.
+It provides `Result` and `Result<T>` types to represent success or failure
+without relying on exceptions for control flow.
 
-## Features
+## Why Result?
 
-- Fluent API: `Try`, `Map`, `Bind`, `Match`
-- `Result` and `Result<T>`
-- Exception-safe execution via `Result.Try(...)`
-- Designed for clean, chainable functional pipelines
+Exception-based error handling can make control flow harder to reason about.
 
-## Why Resultify?
+Using Result types makes success and failure explicit.
 
-- **Safer error handling:** Avoid exceptions in normal control flow.
-- **Readable code:** Compose operations with `Map`/`Bind` instead of nested `if` checks.
-- **Consistent outcomes:** Model success and failure explicitly with a single return type.
+## Key ideas
 
-## Getting Started
-
-Start with **Getting Started** (installation + first usage), then explore:
-
-- **Examples** for common patterns and pipelines
-- **API Reference** for the full surface area
+- explicit success / failure
+- functional composition
+- predictable control flow
