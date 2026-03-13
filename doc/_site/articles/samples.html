@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="../">
       
       
-      <meta name="docfx:docurl" content="https://github.com/Monadion/Resultify/blob/feature/docfx/doc/articles/samples.md/#L1">
+      <meta name="docfx:docurl" content="https://github.com/Monadion/Resultify/blob/feature/sample/doc/articles/samples.md/#L1">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -91,55 +91,137 @@
 <p>In your C# code, add:</p>
 <pre><code class="lang-c#">using Monadion.Resultify;
 </code></pre>
-<h2 id="sample-1--success-non-generic">Sample 1 — Success (non-generic)</h2>
+<h2 id="success-sample-non-generic">Success Sample (non-generic)</h2>
 <pre><code class="lang-c#">Result result = Result.Success();
 
 if (result.IsSuccess)
 {
-    Console.WriteLine(&quot;result success&quot;);
+    Console.WriteLine(&quot;Non Generic result succeeded.&quot;);
 }
 </code></pre>
-<h2 id="sample-2--failure-non-generic">Sample 2 — Failure (non-generic)</h2>
-<pre><code class="lang-c#">Error error = new Error(&quot;Error.Code&quot;, &quot; error description&quot;);
+<h2 id="success-sample-generic">Success Sample (generic)</h2>
+<pre><code class="lang-c#">Result&lt;int&gt; result = Result&lt;int&gt;.Success(1);
+
+if (result.IsSuccess)
+{
+    Console.WriteLine($&quot;Generic result succeeded. number: {result.Value}&quot;);
+}
+</code></pre>
+<h2 id="failure-sample-non-generic">Failure Sample (non-generic)</h2>
+<pre><code class="lang-c#">Error error = new Error(&quot;Error.Code.Non.Generic&quot;, &quot;Non generic rrror description&quot;);
 
 Result result = Result.Failure(error);
 
 if (result.IsFailure)
 {
-    Console.WriteLine($&quot;result failure | code: {result.Error.Code}, description: {result.Error.Description}&quot;);
+    Console.WriteLine($&quot;failure | code: {result.Error.Code}, description: {result.Error.Description}&quot;);
 }
 </code></pre>
-<h2 id="sample-3--success-generic">Sample 3 — Success (generic)</h2>
-<pre><code class="lang-c#">Result&lt;int&gt; result = Result&lt;int&gt;.Success(1);
-
-if (result.IsSuccess)
-{
-    Console.WriteLine($&quot;result success | value:{result.Value}&quot;);
-}
-</code></pre>
-<h2 id="sample-4--failure-generic">Sample 4 — Failure (generic)</h2>
-<pre><code class="lang-c#">Error error = new Error(&quot;Error.Code&quot;, &quot;error description&quot;);
+<h2 id="failure-sample-generic">Failure Sample (generic)</h2>
+<pre><code class="lang-c#">Error error = new Error(&quot;Error.Code.Generic&quot;, &quot;Generic error description&quot;);
 
 Result&lt;int&gt; result = Result&lt;int&gt;.Failure(error);
 
 if (result.IsFailure)
+    Console.WriteLine($&quot;failure | code: {result.Error.Code}, description: {result.Error.Description}&quot;);
+</code></pre>
+<h2 id="try-sample-non-generic">Try Sample (non-generic)</h2>
+<pre><code class="lang-c#">var result = Result.Try(() =&gt; int.Parse(&quot;sample&quot;));
+
+if (result.IsSuccess)
 {
-    Console.WriteLine($&quot;result failure | code: {result.Error.Code}, description: {result.Error.Description}&quot;);
+    Console.WriteLine(&quot;Parsing succeeded.&quot;);
+}
+else
+{
+    Console.WriteLine($&quot;Parsing failed: {result.Error.Description}&quot;);
 }
 </code></pre>
-<h2 id="sample-5--try--match-exception-safe">Sample 5 — Try + Match (exception-safe)</h2>
-<pre><code class="lang-c#">Result&lt;int&gt;
-    .Try(() =&gt; { throw new DivideByZeroException(); })
-    .Match(
-        success =&gt; Console.WriteLine($&quot;success: {success}&quot;),
-        failure =&gt; Console.WriteLine($&quot;failure: {failure.Description}&quot;)
-    );
+<h2 id="try-sample-generic">Try Sample (generic)</h2>
+<pre><code class="lang-c#">var result = Result&lt;int&gt;.Try(() =&gt; int.Parse(&quot;sample&quot;));
+
+if (result.IsSuccess)
+{
+    Console.WriteLine($&quot;Parsing succeeded. value: {result.Value}&quot;);
+}
+else
+{
+    Console.WriteLine($&quot;Parsing failed: {result.Error.Description}&quot;);
+}
+</code></pre>
+<h2 id="map-sample-non-generic">Map Sample (non-generic)</h2>
+<pre><code class="lang-c#">Result&lt;int&gt; result = Result
+    .Success()
+    .Map(() =&gt; 2 * 2);
+
+if (result.IsSuccess)
+    Console.WriteLine($&quot;Mapped value: {result.Value}&quot;);
+</code></pre>
+<h2 id="map-sample-generic">Map Sample (generic)</h2>
+<pre><code class="lang-c#">Result&lt;int&gt; result = Result&lt;int&gt;
+    .Success(1)
+    .Map(x =&gt; x * 2);
+
+if (result.IsSuccess)
+    Console.WriteLine($&quot;Mapped value: {result.Value}&quot;);
+</code></pre>
+<h2 id="bind-sample-non-generic">Bind Sample (non-generic)</h2>
+<pre><code class="lang-c#">var result =
+    Result.Success()
+            .Bind(() =&gt;
+            {
+                Console.WriteLine(&quot;Bind executed&quot;);
+                return Result.Success();
+            });
+
+Console.WriteLine(result.IsSuccess
+    ? &quot;Pipeline succeeded&quot;
+    : &quot;Pipeline failed&quot;);
+</code></pre>
+<h2 id="bind-sample-generic">Bind Sample (generic)</h2>
+<pre><code class="lang-c#">var result =
+    Result&lt;int&gt;.Success(1)
+            .Bind(x =&gt;
+            {
+                Console.WriteLine($&quot;Bind executed value: {x}&quot;);
+                return Result&lt;int&gt;.Success(x);
+            });
+
+Console.WriteLine(result.IsSuccess
+    ? &quot;Pipeline succeeded&quot;
+    : &quot;Pipeline failed&quot;);
+</code></pre>
+<h2 id="pipeline-sample-non-generic">Pipeline Sample (non-generic)</h2>
+<pre><code class="lang-c#">string input = &quot;10&quot;;
+
+var message =
+    Result.Try(() =&gt; int.Parse(input))
+            .Bind(() =&gt; Result.Success())
+            .Match(
+                () =&gt; &quot;success&quot;,
+                failure =&gt; $&quot;Error: {failure.Description}&quot;
+            );
+
+Console.WriteLine(message);
+</code></pre>
+<h2 id="pipeline-sample-generic">Pipeline Sample (generic)</h2>
+<pre><code class="lang-c#">string input = &quot;10&quot;;
+
+var message =
+    Result&lt;int&gt;.Try(() =&gt; int.Parse(input))
+            .Bind((x) =&gt; Result&lt;int&gt;.Success(x * 2))
+            .Match(
+                success =&gt; $&quot;success {success}&quot;,
+                failure =&gt; $&quot;Error: {failure.Description}&quot;
+            );
+
+Console.WriteLine(message);
 </code></pre>
 
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/Monadion/Resultify/blob/feature/docfx/doc/articles/samples.md/#L1" class="edit-link">Edit this page</a>
+          <a href="https://github.com/Monadion/Resultify/blob/feature/sample/doc/articles/samples.md/#L1" class="edit-link">Edit this page</a>
         </div>
 
         <div class="next-article d-print-none border-top" id="nextArticle"></div>

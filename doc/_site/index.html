@@ -16,7 +16,7 @@
       <meta name="docfx:rel" content="">
       
       
-      <meta name="docfx:docurl" content="https://github.com/Monadion/Resultify/blob/feature/docfx/doc/index.md/#L1">
+      <meta name="docfx:docurl" content="https://github.com/Monadion/Resultify/blob/feature/sample/doc/index.md/#L1">
       <meta name="loc:inThisArticle" content="In this article">
       <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
       <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
@@ -88,13 +88,17 @@ It provides <code>Result</code> and <code>Result&lt;T&gt;</code> with <code>Try<
 <pre><code class="lang-bash">dotnet add package Monadion.Resultify
 </code></pre>
 <h2 id="quick-example">Quick Example</h2>
-<pre><code class="lang-c#">var message =
-    Result.Try(() =&gt; int.Parse(input))
-          .Map(x =&gt; x * 2)
-          .Match(
-              onSuccess: v =&gt; $&quot;OK: {v}&quot;,
-              onFailure: e =&gt; $&quot;ERR: {e}&quot;
-          );
+<pre><code class="lang-c#">    string input = &quot;10&quot;;
+
+    var message =
+        Result&lt;int&gt;.Try(() =&gt; int.Parse(input))
+                .Bind((x) =&gt; Result&lt;int&gt;.Success(x * 2))
+                .Match(
+                    success =&gt; $&quot;success {success}&quot;,
+                    failure =&gt; $&quot;Error: {failure.Description}&quot;
+                );
+
+    Console.WriteLine(message);
 </code></pre>
 <h2 id="project-links">Project Links</h2>
 <ul>
@@ -106,7 +110,7 @@ It provides <code>Result</code> and <code>Result&lt;T&gt;</code> with <code>Try<
 </article>
 
         <div class="contribution d-print-none">
-          <a href="https://github.com/Monadion/Resultify/blob/feature/docfx/doc/index.md/#L1" class="edit-link">Edit this page</a>
+          <a href="https://github.com/Monadion/Resultify/blob/feature/sample/doc/index.md/#L1" class="edit-link">Edit this page</a>
         </div>
 
         <div class="next-article d-print-none border-top" id="nextArticle"></div>

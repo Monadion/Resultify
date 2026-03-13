@@ -1,5 +1,3 @@
-using System;
-
 namespace Resultify.UnitTest;
 
 public sealed class ResultOfTTests
@@ -45,6 +43,64 @@ public sealed class ResultOfTTests
         Assert.False(result.IsSuccess);
         Assert.Equal(error, result.Error);
         Assert.Equal(default(int), result.Value);
+    }
+
+    [Fact]
+    public void Match_ShouldExecuteCorrectAction_OnSuccess()
+    {
+        var result = Result<int>.Success(1);
+        var successCalled = false;
+        var failureCalled = false;
+
+        result.Match(
+            (x) => successCalled = true,
+            _ => failureCalled = true
+        );
+
+        Assert.True(successCalled);
+        Assert.False(failureCalled);
+    }
+
+    [Fact]
+    public void Match_ShouldExecuteCorrectAction_OnFailure()
+    {
+        var error = new Error("E002");
+        var result = Result<int>.Failure(error);
+        var successCalled = false;
+        var failureCalled = false;
+        Error? capturedError = null;
+
+        result.Match(
+            (x) => successCalled = true,
+            e =>
+            {
+                failureCalled = true;
+                capturedError = e;
+            }
+        );
+
+        Assert.False(successCalled);
+        Assert.True(failureCalled);
+        Assert.Equal(error, capturedError);
+    }
+
+    [Fact]
+    public void Try_ShouldReturnSuccess_WhenNoException()
+    {
+        var result = Result<int>.Try(() => int.Parse("1"));
+
+        Assert.True(result.IsSuccess);
+        Assert.Equal(Error.None, result.Error);
+    }
+
+    [Fact]
+    public void Try_ShouldReturnFailure_WhenExceptionThrown()
+    {
+        var result = Result<int>.Try(() => throw new InvalidOperationException("fail"));
+
+        Assert.False(result.IsSuccess);
+        Assert.Equal("InvalidOperationException", result.Error.Code);
+        Assert.Equal("fail", result.Error.Description);
     }
 
     [Fact]
