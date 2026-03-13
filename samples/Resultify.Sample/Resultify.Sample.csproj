@@ -11,4 +11,11 @@
     <ProjectReference Include="..\..\src\Resultify\Resultify.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Basic\" />
+    <Folder Include="Pipelines\" />
+    <Folder Include="Transform\" />
+    <Folder Include="Try\" />
+  </ItemGroup>
+
 </Project>

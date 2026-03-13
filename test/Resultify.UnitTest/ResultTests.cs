@@ -1,5 +1,3 @@
-using System;
-
 namespace Resultify.UnitTest;
 
 public sealed class ResultTests
@@ -22,6 +20,28 @@ public sealed class ResultTests
 
         Assert.False(result.IsSuccess);
         Assert.True(result.IsFailure);
+        Assert.Equal(error, result.Error);
+    }
+
+    [Fact]
+    public void Map_ShouldTransformValue_WhenSuccess()
+    {
+        var result = Result.Success()
+            .Map(() => { return Result<int>.Success(1); });
+
+        Assert.True(result.IsSuccess);
+        Assert.NotNull(result);
+        Assert.Equal(1, result?.Value?.Value);
+    }
+
+    [Fact]
+    public void Map_ShouldNotChangeResult_WhenFailure()
+    {
+        var error = new Error("E006");
+        var result = Result.Failure(error)
+            .Map(() => { return Result<int>.Success(1); });
+
+        Assert.False(result.IsSuccess);
         Assert.Equal(error, result.Error);
     }
 

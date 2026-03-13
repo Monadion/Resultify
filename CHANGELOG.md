@@ -21,6 +21,11 @@ All notable changes to this project will be documented in this file.
 - edited **`.Core`** namespace.
 - edited readme file.
 - edited docfx project.
+- changed samples project structure.
+- edited unit tests by samples.
+- **`global.json`** edited to **`10.0.200`** from **`10.0.102`**
+- README.md quick example edited.
+- docfx sample file edited by samples. 
 
 ### Fixed
 

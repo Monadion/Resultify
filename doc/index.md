@@ -25,13 +25,17 @@ dotnet add package Monadion.Resultify
 
 ## Quick Example
 ```c#
-var message =
-    Result.Try(() => int.Parse(input))
-          .Map(x => x * 2)
-          .Match(
-              onSuccess: v => $"OK: {v}",
-              onFailure: e => $"ERR: {e}"
-          );
+    string input = "10";
+
+    var message =
+        Result<int>.Try(() => int.Parse(input))
+                .Bind((x) => Result<int>.Success(x * 2))
+                .Match(
+                    success => $"success {success}",
+                    failure => $"Error: {failure.Description}"
+                );
+
+    Console.WriteLine(message);
 ```
 
 ## Project Links
