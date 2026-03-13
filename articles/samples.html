@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Samples | Resultify </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Samples | Resultify ">
+      
+      
+      <link rel="icon" href="../images/logo.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/Monadion/Resultify/blob/main/doc/articles/samples.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../images/logo.png" alt="Resultify">
+            Resultify
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="samples">Samples</h1>
+
+<p>All samples below assume:</p>
+<p>In your C# code, add:</p>
+<pre><code class="lang-c#">using Monadion.Resultify;
+</code></pre>
+<h2 id="success-sample-non-generic">Success Sample (non-generic)</h2>
+<pre><code class="lang-c#">Result result = Result.Success();
+
+if (result.IsSuccess)
+{
+    Console.WriteLine(&quot;Non Generic result succeeded.&quot;);
+}
+</code></pre>
+<h2 id="success-sample-generic">Success Sample (generic)</h2>
+<pre><code class="lang-c#">Result&lt;int&gt; result = Result&lt;int&gt;.Success(1);
+
+if (result.IsSuccess)
+{
+    Console.WriteLine($&quot;Generic result succeeded. number: {result.Value}&quot;);
+}
+</code></pre>
+<h2 id="failure-sample-non-generic">Failure Sample (non-generic)</h2>
+<pre><code class="lang-c#">Error error = new Error(&quot;Error.Code.Non.Generic&quot;, &quot;Non generic rrror description&quot;);
+
+Result result = Result.Failure(error);
+
+if (result.IsFailure)
+{
+    Console.WriteLine($&quot;failure | code: {result.Error.Code}, description: {result.Error.Description}&quot;);
+}
+</code></pre>
+<h2 id="failure-sample-generic">Failure Sample (generic)</h2>
+<pre><code class="lang-c#">Error error = new Error(&quot;Error.Code.Generic&quot;, &quot;Generic error description&quot;);
+
+Result&lt;int&gt; result = Result&lt;int&gt;.Failure(error);
+
+if (result.IsFailure)
+    Console.WriteLine($&quot;failure | code: {result.Error.Code}, description: {result.Error.Description}&quot;);
+</code></pre>
+<h2 id="try-sample-non-generic">Try Sample (non-generic)</h2>
+<pre><code class="lang-c#">var result = Result.Try(() =&gt; int.Parse(&quot;sample&quot;));
+
+if (result.IsSuccess)
+{
+    Console.WriteLine(&quot;Parsing succeeded.&quot;);
+}
+else
+{
+    Console.WriteLine($&quot;Parsing failed: {result.Error.Description}&quot;);
+}
+</code></pre>
+<h2 id="try-sample-generic">Try Sample (generic)</h2>
+<pre><code class="lang-c#">var result = Result&lt;int&gt;.Try(() =&gt; int.Parse(&quot;sample&quot;));
+
+if (result.IsSuccess)
+{
+    Console.WriteLine($&quot;Parsing succeeded. value: {result.Value}&quot;);
+}
+else
+{
+    Console.WriteLine($&quot;Parsing failed: {result.Error.Description}&quot;);
+}
+</code></pre>
+<h2 id="map-sample-non-generic">Map Sample (non-generic)</h2>
+<pre><code class="lang-c#">Result&lt;int&gt; result = Result
+    .Success()
+    .Map(() =&gt; 2 * 2);
+
+if (result.IsSuccess)
+    Console.WriteLine($&quot;Mapped value: {result.Value}&quot;);
+</code></pre>
+<h2 id="map-sample-generic">Map Sample (generic)</h2>
+<pre><code class="lang-c#">Result&lt;int&gt; result = Result&lt;int&gt;
+    .Success(1)
+    .Map(x =&gt; x * 2);
+
+if (result.IsSuccess)
+    Console.WriteLine($&quot;Mapped value: {result.Value}&quot;);
+</code></pre>
+<h2 id="bind-sample-non-generic">Bind Sample (non-generic)</h2>
+<pre><code class="lang-c#">var result =
+    Result.Success()
+            .Bind(() =&gt;
+            {
+                Console.WriteLine(&quot;Bind executed&quot;);
+                return Result.Success();
+            });
+
+Console.WriteLine(result.IsSuccess
+    ? &quot;Pipeline succeeded&quot;
+    : &quot;Pipeline failed&quot;);
+</code></pre>
+<h2 id="bind-sample-generic">Bind Sample (generic)</h2>
+<pre><code class="lang-c#">var result =
+    Result&lt;int&gt;.Success(1)
+            .Bind(x =&gt;
+            {
+                Console.WriteLine($&quot;Bind executed value: {x}&quot;);
+                return Result&lt;int&gt;.Success(x);
+            });
+
+Console.WriteLine(result.IsSuccess
+    ? &quot;Pipeline succeeded&quot;
+    : &quot;Pipeline failed&quot;);
+</code></pre>
+<h2 id="pipeline-sample-non-generic">Pipeline Sample (non-generic)</h2>
+<pre><code class="lang-c#">string input = &quot;10&quot;;
+
+var message =
+    Result.Try(() =&gt; int.Parse(input))
+            .Bind(() =&gt; Result.Success())
+            .Match(
+                () =&gt; &quot;success&quot;,
+                failure =&gt; $&quot;Error: {failure.Description}&quot;
+            );
+
+Console.WriteLine(message);
+</code></pre>
+<h2 id="pipeline-sample-generic">Pipeline Sample (generic)</h2>
+<pre><code class="lang-c#">string input = &quot;10&quot;;
+
+var message =
+    Result&lt;int&gt;.Try(() =&gt; int.Parse(input))
+            .Bind((x) =&gt; Result&lt;int&gt;.Success(x * 2))
+            .Match(
+                success =&gt; $&quot;success {success}&quot;,
+                failure =&gt; $&quot;Error: {failure.Description}&quot;
+            );
+
+Console.WriteLine(message);
+</code></pre>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/Monadion/Resultify/blob/main/doc/articles/samples.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
