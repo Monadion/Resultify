@@ -25,13 +25,17 @@ All notable changes to this project will be documented in this file.
 - edited unit tests by samples.
 - **`global.json`** edited to **`10.0.200`** from **`10.0.102`**
 - README.md quick example edited.
-- docfx sample file edited by samples. 
+- docfx sample file edited by samples.
+- **.vs/** folder added to **.gitignore** file. 
 
 ### Fixed
 
 - fixed **`docs.yml`** **`--force`** keyword on **`Build Documentation`** step.
 
+### Removed
 
+- references/ folder removed.
+- reports/ folder removed.
 
 
 
